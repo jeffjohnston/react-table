@@ -24,13 +24,13 @@
     background-color: #e3e3e3;
 }
 
-.even:hover {
+.even:hover,.odd:hover {
     font-family: verdana, arial, helvetica, sans-serif;
     font-size: 11px;
     padding: 3px 4px 3px 4px;
     background-color: #fdecae;
 }
 
-.even:hover td {
+.even:hover,.odd:hover td {
     border: 1px solid #fdecae;
 }
