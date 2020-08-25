@@ -6,8 +6,8 @@ class Toolbar extends Component {
 	render() {
 		return (
 			<div>
-				<ToolbarButton name='Prev'/>
-				<ToolbarButton name='Next'/>
+				<ToolbarButton name='Prev' action={this.props.prevAction}/>
+				<ToolbarButton name='Next' action={this.props.nextAction}/>
 			</div>
 		);
 	}

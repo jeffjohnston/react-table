@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 
 class ToolbarButton extends Component {
+
 	render() {
 		return (
-			<button>{this.props.name}</button>
+			<button onClick={this.props.action}>{this.props.name}</button>
 		);
 	}
 }
