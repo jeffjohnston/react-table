@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 
 import Column from '../Column/Column';
+import classes from './Row.module.css'
+
+function isEven(n) {
+	return n % 2 == 0;
+}
 
 class Row extends Component {
+
 	render() {
 		const item = this.props.item;
+		const rowClassName = this.props.rownum % 2 == 0 ? classes.even : classes.odd;
 		return (
-			<tr>
+			<tr className={rowClassName}>
 				{this.props.columns.map(column => {
 					const value = item[column.property];
 					return <Column key={column.property} column={column} value={value}/>

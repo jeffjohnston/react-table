@@ -1,0 +1,36 @@
+.odd td,.even td {
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size: 11px;
+    padding: 2px 3px 2px 3px;
+}
+
+.odd td {
+    border: 1px solid #ffffff;
+}
+
+.even td {
+    border: 1px solid #e3e3e3;
+}
+
+.removed td {
+    border: 1px solid white;
+}
+
+.odd {
+    background-color: #ffffff;
+}
+
+.even {
+    background-color: #e3e3e3;
+}
+
+.even:hover {
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size: 11px;
+    padding: 3px 4px 3px 4px;
+    background-color: #fdecae;
+}
+
+.even:hover td {
+    border: 1px solid #fdecae;
+}
