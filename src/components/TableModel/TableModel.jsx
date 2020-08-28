@@ -7,6 +7,7 @@ import Toolbar from '../Toolbar/Toolbar';
 class TableModel extends Component {
 
 	render() {
+		console.log('render table model');
 		return (
 			<div>
 				<Toolbar/>

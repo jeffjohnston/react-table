@@ -6,6 +6,7 @@ import classes from './Table.module.css'
 
 class Table extends Component {
 	render() {
+		console.log('render table');
 		return (
 			<table className={classes.table} cellPadding={0} cellSpacing={0} border={0}>
 				<thead>
