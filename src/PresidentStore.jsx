@@ -32,6 +32,10 @@ export default class Store {
 		}
 	}
 
+	get getPage() {
+		return this.limit.rowSelect.page;
+	}
+
 	get getItems() {
 		const rowSelect = this.limit.rowSelect;
 		const page = rowSelect.page;

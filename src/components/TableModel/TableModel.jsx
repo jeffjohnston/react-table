@@ -6,21 +6,10 @@ import Toolbar from '../Toolbar/Toolbar';
 
 class TableModel extends Component {
 
-	prevHandler = () => {
-		this.props.store.prevPage();
-	}
-
-	nextHandler = () => {
-		this.props.store.nextPage();
-	}
-
 	render() {
 		return (
 			<div>
-				<Toolbar
-					prevAction={this.prevHandler}
-					nextAction={this.nextHandler}
-				/>
+				<Toolbar/>
 				<Table
 					model={this.props.model}
 					items={this.props.store.getItems}

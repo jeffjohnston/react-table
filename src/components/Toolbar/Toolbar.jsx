@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 
-import ToolbarButton from '../Toolbar/ToolbarButton'
+import PrevPageToolbarItem from '../Toolbar/PrevPageToolbarItem'
+import NextPageToolbarItem from '../Toolbar/NextPageToolbarItem'
 
 class Toolbar extends Component {
 	render() {
 		return (
 			<div>
-				<ToolbarButton name='Prev' action={this.props.prevAction}/>
-				<ToolbarButton name='Next' action={this.props.nextAction}/>
+				<PrevPageToolbarItem/>
+				<NextPageToolbarItem/>
 			</div>
 		);
 	}
