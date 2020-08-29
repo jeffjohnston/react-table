@@ -20,13 +20,13 @@ export default class Store {
 		this.limit.rowSelect.page = page;
 	}
 
-	prevPage() {
+	setToPrevPage() {
 		if (this.limit.rowSelect.page > 1) {
 			this.limit.rowSelect.page--;
 		}
 	}
 
-	nextPage() {
+	setToNextPage() {
 		const rowSelect = this.limit.rowSelect;
 		const page = rowSelect.page;
 		const maxRows = rowSelect.maxRows;

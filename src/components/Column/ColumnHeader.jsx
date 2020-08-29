@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
+import {startCase} from 'lodash';
 
 class ColumnHeader extends Component {
 
 	render() {
 		let title = this.props.column.title && this.props.column.title !== null ? this.props.column.title : this.props.column.property;
-		title = _.startCase(title);
+		title = startCase(title);
 		return (
 			<th>{title}</th>
 		);
