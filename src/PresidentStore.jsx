@@ -1,4 +1,4 @@
-import { observable, action, computed, decorate } from "mobx";
+import { observable, decorate } from "mobx";
 
 export default class Store {
 
@@ -32,8 +32,15 @@ export default class Store {
 		}
 	}
 
-	get getPage() {
-		return this.limit.rowSelect.page;
+	get isFirstPage() {
+		return this.limit.rowSelect.page === 1;
+	}
+
+	get isLastPage() {
+		const page = this.limit.rowSelect.page;
+		const totalRows = this.limit.rowSelect.totalRows;
+		const maxRows = this.limit.rowSelect.maxRows;
+		return Math.ceil(totalRows / maxRows) === page;
 	}
 
 	get getItems() {
@@ -61,7 +68,7 @@ export default class Store {
 }
 
 const isValidPage = (page, maxRows, totalRows) => {
-	if (page == 1) {
+	if (page === 1) {
 		return true;
 	}
 

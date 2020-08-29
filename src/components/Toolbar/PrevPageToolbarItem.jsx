@@ -12,11 +12,11 @@ class PrevPageToolbarItem extends Component {
 
 	render() {
 		console.log('render prev page');
-		const page = this.props.store.getPage;
-		const img = page == 1 ? prevPageDisabledImg : prevPageImg;
+		const firstPage = this.props.store.isFirstPage;
+		const img = firstPage ? prevPageDisabledImg : prevPageImg;
 		return (
-			<button onClick={this.prevPageHandler}>
-				<img src={img} alt="my image"/>
+			<button disabled={firstPage} onClick={this.prevPageHandler}>
+				<img src={img} alt="Prev"/>
 			</button>
 		);
 	}
