@@ -3,6 +3,7 @@ import {inject, observer} from "mobx-react";
 
 import prevPageImg from '../../images/prevPage.gif';
 import prevPageDisabledImg from '../../images/prevPageDisabled.gif';
+import classes from './PrevPageToolbarItem.module.css'
 
 class PrevPageToolbarItem extends Component {
 
@@ -15,8 +16,11 @@ class PrevPageToolbarItem extends Component {
 		const firstPage = this.props.store.isFirstPage;
 		const img = firstPage ? prevPageDisabledImg : prevPageImg;
 		return (
-			<button disabled={firstPage} onClick={this.prevPageHandler}>
-				<img src={img} alt="Prev"/>
+			<button
+				className={classes.button}
+				disabled={firstPage}
+				onClick={this.prevPageHandler}>
+					<img src={img} alt="Prev"/>
 			</button>
 		);
 	}

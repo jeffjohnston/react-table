@@ -3,6 +3,7 @@ import {inject, observer} from "mobx-react";
 
 import nextPageDisabledImg from "../../images/nextPageDisabled.gif";
 import nextPageImg from "../../images/nextPage.gif";
+import classes from './NextPageToolbarItem.module.css'
 
 class NextPageToolbarItem extends Component {
 
@@ -15,8 +16,11 @@ class NextPageToolbarItem extends Component {
 		const lastPage = this.props.store.isLastPage;
 		const img = lastPage ? nextPageDisabledImg : nextPageImg;
 		return (
-			<button disabled={lastPage} onClick={this.nextPageHandler}>
-				<img src={img} alt="Next"/>
+			<button
+				className={classes.button}
+				disabled={lastPage}
+				onClick={this.nextPageHandler}>
+					<img src={img} alt="Next"/>
 			</button>
 		);
 	}

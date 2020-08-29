@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 
 import PrevPageToolbarItem from '../Toolbar/PrevPageToolbarItem'
 import NextPageToolbarItem from '../Toolbar/NextPageToolbarItem'
+import PageNumbersToolbarItem from '../Toolbar/PageNumbersToolbarItem'
+import classes from './Toolbar.module.css'
 
 class Toolbar extends Component {
 	render() {
 		return (
-			<div>
+			<div className={classes.toolbar}>
 				<PrevPageToolbarItem/>
+				<PageNumbersToolbarItem/>
 				<NextPageToolbarItem/>
 			</div>
 		);

@@ -1,0 +1,17 @@
+.linkButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    display: inline;
+    margin: 0;
+    padding: 4px;
+    outline:none;
+}
+.removeTextDecoration {
+    text-decoration: none;
+}
+.linkButton:hover,
+.linkButton:focus {
+    text-decoration: none;
+}

@@ -16,6 +16,10 @@ export default class Store {
 		this.limit.rowSelect.totalRows = items.length
 	}
 
+	setPage(page) {
+		this.limit.rowSelect.page = page;
+	}
+
 	prevPage() {
 		if (this.limit.rowSelect.page > 1) {
 			this.limit.rowSelect.page--;
@@ -32,15 +36,24 @@ export default class Store {
 		}
 	}
 
+	get getCurrentPage() {
+		return this.limit.rowSelect.page;
+	}
+
 	get isFirstPage() {
 		return this.limit.rowSelect.page === 1;
 	}
 
 	get isLastPage() {
+		const totalPages = this.getTotalPages;
 		const page = this.limit.rowSelect.page;
+		return totalPages === page;
+	}
+
+	get getTotalPages() {
 		const totalRows = this.limit.rowSelect.totalRows;
 		const maxRows = this.limit.rowSelect.maxRows;
-		return Math.ceil(totalRows / maxRows) === page;
+		return Math.ceil(totalRows / maxRows);
 	}
 
 	get getItems() {

@@ -1,0 +1,8 @@
+.button {
+    background-color: transparent;
+    vertical-align: middle;
+    border: none;
+    margin: auto;
+    cursor: pointer;
+    outline:none;
+}
