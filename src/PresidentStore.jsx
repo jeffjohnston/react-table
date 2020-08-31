@@ -4,63 +4,66 @@ export default class Store {
 
 	items = [];
 	limit = {
-		rowSelect: {
-			page : 1,
-			maxRows: 10,
-			totalRows: 0,
-		}
+		page : 1,
+		maxRows: 10,
+		totalRows: 0,
+		sortSet: [],
+		filterSet: []
 	}
 
 	constructor(items) {
 		this.items = items;
-		this.limit.rowSelect.totalRows = items.length
+		this.limit.totalRows = items.length
 	}
 
 	setPage(page) {
-		this.limit.rowSelect.page = page;
+		this.limit.page = page;
 	}
 
 	setToPrevPage() {
-		if (this.limit.rowSelect.page > 1) {
-			this.limit.rowSelect.page--;
+		if (this.limit.page > 1) {
+			this.limit.page--;
 		}
 	}
 
 	setToNextPage() {
-		const rowSelect = this.limit.rowSelect;
-		const page = rowSelect.page;
-		const maxRows = rowSelect.maxRows;
-		const totalRows = rowSelect.totalRows;
+		const page = this.limit.page;
+		const maxRows = this.limit.maxRows;
+		const totalRows = this.limit.totalRows;
 		if (isValidPage(page + 1, maxRows, totalRows)) {
-			this.limit.rowSelect.page++;
+			this.limit.page++;
 		}
 	}
 
+	sortColumn(sort) {
+		console.log(sort);
+		this.limit.sortSet.push(sort);
+	}
+
 	get getCurrentPage() {
-		return this.limit.rowSelect.page;
+		return this.limit.page;
 	}
 
 	get isFirstPage() {
-		return this.limit.rowSelect.page === 1;
+		return this.limit.page === 1;
 	}
 
 	get isLastPage() {
 		const totalPages = this.getTotalPages;
-		const page = this.limit.rowSelect.page;
+		const page = this.limit.page;
 		return totalPages === page;
 	}
 
 	get getTotalPages() {
-		const totalRows = this.limit.rowSelect.totalRows;
-		const maxRows = this.limit.rowSelect.maxRows;
+		const totalRows = this.limit.totalRows;
+		const maxRows = this.limit.maxRows;
 		return Math.ceil(totalRows / maxRows);
 	}
 
 	get getItems() {
-		const rowSelect = this.limit.rowSelect;
-		const page = rowSelect.page;
-		const maxRows = rowSelect.maxRows;
-		const totalRows = rowSelect.totalRows;
+		const page = this.limit.page;
+		const maxRows = this.limit.maxRows;
+		const totalRows = this.limit.totalRows;
 
 		let rowStart = (page - 1) * maxRows;
 		let rowEnd = rowStart + maxRows;
