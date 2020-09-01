@@ -1,4 +1,5 @@
 import { observable, decorate } from "mobx";
+import _ from 'lodash';
 
 export default class Store {
 
@@ -35,9 +36,27 @@ export default class Store {
 		}
 	}
 
-	sortColumn(sort) {
-		console.log(sort);
-		this.limit.sortSet.push(sort);
+	sortColumn(property) {
+		console.log('sort column ' + property);
+
+		const sortSet = [...this.limit.sortSet];
+		const foundSort = _.remove(sortSet, function(sort) {
+			return sort.property === property;
+		});
+
+		if (foundSort && foundSort.length > 0) {
+			const order = foundSort[0].order;
+			if (order === 'asc') {
+				const sort = {property, order: 'desc'}
+				sortSet.push(sort);
+			}
+		} else {
+			const sort = {property, order: 'asc'}
+			sortSet.push(sort);
+		}
+
+		this.limit.page = 1;
+		this.limit.sortSet = sortSet;
 	}
 
 	get getCurrentPage() {
@@ -60,7 +79,22 @@ export default class Store {
 		return Math.ceil(totalRows / maxRows);
 	}
 
+	get getSortSet() {
+		return this.limit.sortSet;
+	}
+
 	get getItems() {
+		let cloneItems = [...this.items];
+
+		// first sort
+		const sortSet = this.limit.sortSet;
+		if (sortSet && sortSet.length > 0) {
+			const properties = sortSet.map(sort => sort.property);
+			const orders = sortSet.map(sort => sort.order);
+			cloneItems = _.orderBy(cloneItems, properties, orders);
+		}
+
+		// figure out the pages
 		const page = this.limit.page;
 		const maxRows = this.limit.maxRows;
 		const totalRows = this.limit.totalRows;
@@ -75,7 +109,7 @@ export default class Store {
 
 		let i;
 		for (i = rowStart; i < rowEnd; i++) {
-			const item = this.items[i];
+			const item = cloneItems[i];
 			results.push(item);
 		}
 
