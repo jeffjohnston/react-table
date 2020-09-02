@@ -59,6 +59,23 @@ export default class Store {
 		this.limit.sortSet = sortSet;
 	}
 
+	filterColumn(property, value) {
+		console.log('filter column ' + property + ' with value ' +  value);
+
+		const filterSet = [...this.limit.filterSet];
+		_.remove(filterSet, function(filter) {
+			return filter.property === property;
+		});
+
+		if (value) {
+			const filter = {property, value}
+			filterSet.push(filter);
+		}
+
+		this.limit.page = 1;
+		this.limit.filterSet = filterSet;
+	}
+
 	get getCurrentPage() {
 		return this.limit.page;
 	}
@@ -85,6 +102,14 @@ export default class Store {
 
 	get getItems() {
 		let cloneItems = [...this.items];
+
+		// first filter
+		//
+		// lodash:
+		// people.filter(p => p.name.includes('im'))
+		//
+		// es6:
+		// people.filter(p => p.name.includes('im'))
 
 		// first sort
 		const sortSet = this.limit.sortSet;

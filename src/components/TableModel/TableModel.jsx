@@ -10,11 +10,13 @@ class TableModel extends Component {
 		console.log('render table model');
 		return (
 			<div>
+				<form>
 				<Toolbar/>
 				<Table
 					model={this.props.model}
 					items={this.props.store.getItems}
 				/>
+				</form>
 			</div>
 		)
 	}

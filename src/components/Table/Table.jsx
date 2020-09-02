@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import HeaderRow from '../Row/HeaderRow'
+import FilterRow from '../Row/FilterRow'
 import Row from '../Row/Row'
 import classes from './Table.module.css'
 
@@ -13,8 +14,9 @@ class Table extends Component {
 					<HeaderRow columns={this.props.model.table.row.columns} items={this.props.items} />
 				</thead>
 				<tbody>
-					{this.props.items.map((item, index) => (
-						<Row key={item.id} columns={this.props.model.table.row.columns} item={item} rownum={index} />
+				<FilterRow key={'filter_'} columns={this.props.model.table.row.columns} />
+				{this.props.items.map((item, index) => (
+						<Row key={'row_' + item.id} columns={this.props.model.table.row.columns} item={item} rownum={index} />
 					))}
 				</tbody>
 			</table>
