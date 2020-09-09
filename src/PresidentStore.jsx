@@ -3,6 +3,7 @@ import _ from 'lodash';
 
 export default class Store {
 
+	originalItems = []; // keep the original copy
 	items = [];
 	limit = {
 		page : 1,
@@ -13,6 +14,7 @@ export default class Store {
 	}
 
 	constructor(items) {
+		this.originalItems = [...items];
 		this.items = items;
 		this.limit.totalRows = items.length
 	}
@@ -72,8 +74,23 @@ export default class Store {
 			filterSet.push(filter);
 		}
 
+ 		// apply the filtering right away
+
+		if (filterSet && filterSet.length > 0) {
+			this.items = _.filter(this.items, item => {
+				const match = _.find(filterSet, filter => {
+					const value = item[filter.property];
+					return value.toLowerCase().includes(filter.value.toLowerCase());
+				});
+				return match !== undefined;
+			})
+		} else {
+			this.items = [...this.originalItems];
+		}
+
 		this.limit.page = 1;
 		this.limit.filterSet = filterSet;
+		this.limit.totalRows = this.items.length;
 	}
 
 	get getCurrentPage() {
@@ -102,18 +119,6 @@ export default class Store {
 
 	get getItems() {
 		let cloneItems = [...this.items];
-
-		// filter
-		const filterSet = this.limit.filterSet;
-		if (filterSet && filterSet.length > 0) {
-			cloneItems = _.filter(cloneItems, item => {
-				const match = _.find(filterSet, filter => {
-					const value = item[filter.property];
-					return value.toLowerCase().includes(filter.value.toLowerCase());
-				});
-				return match !== undefined;
-			})
-		}
 
 		// sort
 		const sortSet = this.limit.sortSet;
@@ -160,6 +165,5 @@ const isValidPage = (page, maxRows, totalRows) => {
 }
 
 decorate(Store, {
-	items: observable.ref,
 	limit: observable
 });

@@ -11,7 +11,7 @@ class FilterColumn extends Component {
 	}
 
 	render() {
-		console.log('render header column');
+		console.log('render filter column');
 
 		const property = this.props.column.property;
 
