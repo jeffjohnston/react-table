@@ -103,15 +103,19 @@ export default class Store {
 	get getItems() {
 		let cloneItems = [...this.items];
 
-		// first filter
-		//
-		// lodash:
-		// people.filter(p => p.name.includes('im'))
-		//
-		// es6:
-		// people.filter(p => p.name.includes('im'))
+		// filter
+		const filterSet = this.limit.filterSet;
+		if (filterSet && filterSet.length > 0) {
+			cloneItems = _.filter(cloneItems, item => {
+				const match = _.find(filterSet, filter => {
+					const value = item[filter.property];
+					return value.toLowerCase().includes(filter.value.toLowerCase());
+				});
+				return match !== undefined;
+			})
+		}
 
-		// first sort
+		// sort
 		const sortSet = this.limit.sortSet;
 		if (sortSet && sortSet.length > 0) {
 			const properties = sortSet.map(sort => sort.property);
