@@ -4,8 +4,9 @@ import classes from './PageNumbersToolbarItem.module.css'
 
 class PageNumbersToolbarItem extends Component {
 
-	setPageHandler = (page) => {
+	setPageHandler = (e, page) => {
 		this.props.store.setPage(page);
+		e.preventDefault();
 	}
 
 	render() {
@@ -28,7 +29,7 @@ class PageNumbersToolbarItem extends Component {
 					key={i}
 					type="button"
 					className={css}
-					onClick={() => this.setPageHandler(page)}>
+					onClick={(e) => this.setPageHandler(e, page)}>
 					{i}
 				</button>
 			);

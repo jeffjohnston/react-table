@@ -7,8 +7,9 @@ import classes from './NextPageToolbarItem.module.css'
 
 class NextPageToolbarItem extends Component {
 
-	nextPageHandler = () => {
+	nextPageHandler = (e) => {
 		this.props.store.setToNextPage();
+		e.preventDefault();
 	}
 
 	render() {

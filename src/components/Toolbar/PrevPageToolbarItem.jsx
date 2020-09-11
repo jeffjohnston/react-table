@@ -7,8 +7,9 @@ import classes from './PrevPageToolbarItem.module.css'
 
 class PrevPageToolbarItem extends Component {
 
-	prevPageHandler = () => {
+	prevPageHandler = (e) => {
 		this.props.store.setToPrevPage();
+		e.preventDefault();
 	}
 
 	render() {

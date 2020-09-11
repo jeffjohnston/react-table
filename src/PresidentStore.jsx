@@ -69,28 +69,29 @@ export default class Store {
 			return filter.property === property;
 		});
 
-		if (value) {
+		if (!_.isEmpty(value)) {
 			const filter = {property, value}
+			console.log('added filter ' + property + ' with value ' +  value);
 			filterSet.push(filter);
 		}
 
  		// apply the filtering right away
 
+		let cloneItems = [...this.originalItems];
+
 		if (filterSet && filterSet.length > 0) {
-			this.items = _.filter(this.items, item => {
-				const match = _.find(filterSet, filter => {
+			cloneItems = _.filter(cloneItems, item => {
+				return _.every(filterSet, filter => {
 					const value = item[filter.property];
 					return value.toLowerCase().includes(filter.value.toLowerCase());
-				});
-				return match !== undefined;
+				})
 			})
-		} else {
-			this.items = [...this.originalItems];
 		}
 
 		this.limit.page = 1;
 		this.limit.filterSet = filterSet;
-		this.limit.totalRows = this.items.length;
+		this.items = cloneItems;
+		this.limit.totalRows = cloneItems.length;
 	}
 
 	get getCurrentPage() {
@@ -115,6 +116,10 @@ export default class Store {
 
 	get getSortSet() {
 		return this.limit.sortSet;
+	}
+
+	get getFilterSet() {
+		return this.limit.filterSet;
 	}
 
 	get getItems() {

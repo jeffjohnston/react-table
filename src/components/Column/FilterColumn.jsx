@@ -16,7 +16,12 @@ class FilterColumn extends Component {
 		const property = this.props.column.property;
 
 		return (
-			<td><input name={property} onKeyDown={(e) => this.filterColumnHandler(e, property)}/></td>
+			<td>
+				<input
+					name={property}
+					onKeyDown={(e) => this.filterColumnHandler(e, property)}
+				/>
+			</td>
 		);
 	}
 }
